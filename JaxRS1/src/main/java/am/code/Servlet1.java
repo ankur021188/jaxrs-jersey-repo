@@ -1,17 +1,19 @@
 package am.code;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 @Path("/")
 public class Servlet1 {
 
 	@GET
-	public String defaultGreetingMessage() {
-		return "Hello, REST world. <a href='../'>Go Back</a>";
+	public String defaultGreetingMessage(@DefaultValue("Default") @QueryParam("name") String name) {
+		return "Hello, " +name+" REST world. <a href='../'>Go Back</a>";
 	}
 	
 	@Path("{param}")
@@ -19,6 +21,7 @@ public class Servlet1 {
 	public String paramGreetingMessage(@PathParam("param") String parameter) {
 		return "Hello "+parameter+", REST world. <a href='../'>Go Back</a>";
 	}
+	
 	@GET
 	@Path("mediatypetest")
 	@Produces(MediaType.TEXT_HTML)
